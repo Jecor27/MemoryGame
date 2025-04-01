@@ -1,16 +1,17 @@
-export default function MemoryCard({ handleClick }) {
-    const emojiArray = ['🐶', '🐷', '🐙', '🐛', '🐵', '🐶', '🐷', '🐙', '🐛', '🐵']
-    
-    const emojiEl = emojiArray.map((emoji, index) =>
-        <li key={index} className="card-item">
-            <button
-                className="btn btn--emoji"
-                onClick={handleClick}
-            >
-                {emoji}
-            </button>
-        </li>
-    )
-    
-    return <ul className="card-container">{emojiEl}</ul>
+import { decodeEntity } from "html-entities";
+
+export default function MemoryCard({ handleClick, data }) {
+  // console.log(data)
+
+  //const emojiArray = ['🐶', '🐷', '🐙', '🐛', '🐵', '🐶', '🐷', '🐙', '🐛', '🐵']
+
+  const emojiEl = data.map((emoji, index) => (
+    <li key={index} className="card-item">
+      <button className="btn btn--emoji" onClick={handleClick}>
+        {decodeEntity(emoji.htmlCode[0])}
+      </button>
+    </li>
+  ));
+
+  return <ul className="card-container">{emojiEl}</ul>;
 }
