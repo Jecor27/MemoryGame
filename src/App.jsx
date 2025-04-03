@@ -14,6 +14,7 @@ import "./App.css";
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojisData, setEmojisData] = useState([]);
+  const [selectedCards, setSelectedCards] = useState([]);
 
   //console.log(emojisData)
 
@@ -30,8 +31,8 @@ function App() {
 
       //console.log(data);
       //console.log(getRandomIndices(data));
-      const dataSlice = getDataSlice(data);
-      const emojisArray = getEmojisArray(dataSlice);
+      const dataSlice = await getDataSlice(data);
+      const emojisArray = await getEmojisArray(dataSlice);
 
       setEmojisData(emojisArray);
       setIsGameOn(true);
@@ -40,9 +41,12 @@ function App() {
     }
   }
 
-  const getDataSlice = (data) => {
+  const getDataSlice = async (data) => {
     const randomIndices = getRandomIndices(data);
-    const dataSlice = randomIndices.map((index) => data[index]);
+    const dataSlice = randomIndices.reduce((array, index) => {
+      array.push(data[index]);
+      return array;
+    }, []);
     return dataSlice;
   };
 
@@ -72,9 +76,11 @@ function App() {
     return pairedEmojisArray;
   }
 
-  function turnCard() {
-    console.log("Memory card clicked");
+  function turnCard(name, index) {
+    setSelectedCards([{ name, index }]);
   }
+
+  //console.log(selectedCards);
   return (
     <main>
       <h1>Memory</h1>
