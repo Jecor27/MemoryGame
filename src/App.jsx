@@ -1,22 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import MemoryCard from "./components/MemoryCard";
 
 import "./App.css";
 
-/**
- * To do:
- * Step 1: Get random emojis from API
- * Step 2: Duplicate unique emojis
- * Step 3: Shuffle emojis data
- */
-
 function App() {
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojisData, setEmojisData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
+  const [matchedCards, setMatchedCards] = useState([]);
 
   //console.log(emojisData)
+
+
+  //console.log(matchedCards);
+  useEffect(() => {
+    if (
+      selectedCards.length === 2 &&
+      selectedCards[0].name === selectedCards[1].name
+    ) {
+      setMatchedCards((prevMatchedCards) => [
+        ...prevMatchedCards,
+        ...selectedCards,
+      ]);
+    }
+  }, [selectedCards]);
 
   async function startGame(e) {
     e.preventDefault();
@@ -77,7 +85,18 @@ function App() {
   }
 
   function turnCard(name, index) {
-    setSelectedCards([{ name, index }]);
+    const selectedCardEntry = selectedCards.find(
+      (emoji) => emoji.index === index
+    );
+
+    if (!selectedCardEntry && selectedCards.length < 2) {
+      setSelectedCards((prevSelectedCards) => [
+        ...prevSelectedCards,
+        { name, index },
+      ]);
+    } else if (!selectedCardEntry && selectedCards.length === 2) {
+      setSelectedCards([{ name, index }]);
+    }
   }
 
   //console.log(selectedCards);
