@@ -108,11 +108,16 @@ function App() {
   //console.log(selectedCards);
   return (
     <main>
-      <h1>Memory</h1>
-      {!isGameOn && <Form handleSubmit={startGame} />}
-      {isGameOn && <MemoryCard handleClick={turnCard} data={emojisData} />}
+        <h1>Memory</h1>
+        {!isGameOn && <Form handleSubmit={startGame} />}
+        {isGameOn && <MemoryCard 
+        handleClick={turnCard} 
+        data={emojisData} 
+        selectedCards={selectedCards} 
+        matchedCards={matchedCards}
+        />}
     </main>
-  );
+)
 }
 
 export default App;
