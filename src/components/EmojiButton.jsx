@@ -17,7 +17,7 @@ export default function EmojiButton({
     : "btn--emoji__front";
 
   return (
-    <button className={`btn btn--emoji ${btnStyle}`} onClick={handleClick}>
+    <button className={`btn btn--emoji ${btnStyle}`} onClick={selectedCardEntry ? null : handleClick} disabled= {matchedCardEntry}>
       {btnContent}
     </button>
   );

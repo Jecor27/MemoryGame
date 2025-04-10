@@ -70,6 +70,7 @@ function App() {
       const randomIndex = Math.floor(Math.random() * data.length);
       if (!randomIndicesArray.includes(randomIndex)) {
         randomIndicesArray.push(randomIndex);
+        console.log("hello worlds")
       } else {
         i--;
       }
@@ -95,12 +96,12 @@ function App() {
       (emoji) => emoji.index === index
     );
 
-    if (!selectedCardEntry && selectedCards.length < 2) {
+    if (selectedCards.length < 2) {
       setSelectedCards((prevSelectedCards) => [
         ...prevSelectedCards,
         { name, index },
       ]);
-    } else if (!selectedCardEntry && selectedCards.length === 2) {
+    } else if (selectedCards.length === 2) {
       setSelectedCards([{ name, index }]);
     }
   }
