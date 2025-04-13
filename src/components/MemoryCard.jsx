@@ -1,4 +1,3 @@
-import { decodeEntity } from "html-entities";
 import EmojiButton from "./EmojiButton";
 
 export default function MemoryCard({
@@ -7,32 +6,31 @@ export default function MemoryCard({
   selectedCards,
   matchedCards,
 }) {
-  return (
-    <ul className="card-container">
-      {data.map((emoji, index) => {
-        const selectedCardEntry = selectedCards.find(
-          (emoji) => emoji.index === index
-        );
-        const matchedCardEntry = matchedCards.find(
-          (emoji) => emoji.index === index
-        );
-        const cardStyle = matchedCardEntry
-          ? "card-item--matched"
-          : selectedCardEntry
-          ? "card-item--selected"
-          : "";
+  const cardEl = data.map((emoji, index) => {
+    const selectedCardEntry = selectedCards.find(
+      (emoji) => emoji.index === index
+    );
+    const matchedCardEntry = matchedCards.find(
+      (emoji) => emoji.index === index
+    );
 
-        return (
-          <li key={index} className={`card-item ${cardStyle}`}>
-            <EmojiButton
-              content={decodeEntity(emoji.htmlCode[0])}
-              handleClick={() => handleClick(emoji.name, index)}
-              selectedCardEntry={selectedCardEntry}
-              matchedCardEntry={matchedCardEntry}
-            />
-          </li>
-        );
-      })}
-    </ul>
-  );
+    const cardStyle = matchedCardEntry
+      ? "card-item--matched"
+      : selectedCardEntry
+      ? "card-item--selected"
+      : "";
+
+    return (
+      <li key={index} className={`card-item ${cardStyle}`}>
+        <EmojiButton
+          emoji={emoji}
+          handleClick={() => handleClick(emoji.name, index)}
+          selectedCardEntry={selectedCardEntry}
+          matchedCardEntry={matchedCardEntry}
+        />
+      </li>
+    );
+  });
+
+  return <ul className="card-container">{cardEl}</ul>;
 }

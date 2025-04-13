@@ -1,15 +1,17 @@
+import { decodeEntity } from "html-entities";
+
 export default function EmojiButton({
-  content,
+  emoji,
   handleClick,
   selectedCardEntry,
   matchedCardEntry,
 }) {
-  const btnContent = selectedCardEntry
-    ? content
-    : matchedCardEntry
-    ? content
-    : "?";
-  //const btnContent = selectedCardEntry || matchedCardEntry ? content : "?"
+  
+  const btnContent =
+    selectedCardEntry || matchedCardEntry
+      ? decodeEntity(emoji.htmlCode[0])
+      : "?";
+
   const btnStyle = matchedCardEntry
     ? "btn--emoji__back--matched"
     : selectedCardEntry
@@ -17,7 +19,11 @@ export default function EmojiButton({
     : "btn--emoji__front";
 
   return (
-    <button className={`btn btn--emoji ${btnStyle}`} onClick={selectedCardEntry ? null : handleClick} disabled= {matchedCardEntry}>
+    <button
+      className={`btn btn--emoji ${btnStyle}`}
+      onClick={selectedCardEntry ? null : handleClick}
+      disabled={matchedCardEntry}
+    >
       {btnContent}
     </button>
   );
