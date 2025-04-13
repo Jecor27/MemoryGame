@@ -5,8 +5,8 @@ export default function EmojiButton({
   handleClick,
   selectedCardEntry,
   matchedCardEntry,
+  key,
 }) {
-  
   const btnContent =
     selectedCardEntry || matchedCardEntry
       ? decodeEntity(emoji.htmlCode[0])
@@ -18,11 +18,19 @@ export default function EmojiButton({
     ? "btn--emoji__back--selected"
     : "btn--emoji__front";
 
+  const btnAria = matchedCardEntry
+    ? `${decodeEntity(emoji.name)}. Matched.`
+    : selectedCardEntry
+    ? `${decodeEntity(emoji.name)}. Not matched yet.`
+    : "Card upside down.";
+
   return (
     <button
       className={`btn btn--emoji ${btnStyle}`}
       onClick={selectedCardEntry ? null : handleClick}
       disabled={matchedCardEntry}
+      aria-label={`Position ${index + 1}: ${btnAria}`}
+      aria-live="polite"
     >
       {btnContent}
     </button>

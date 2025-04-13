@@ -9,7 +9,7 @@ function App() {
   const [emojisData, setEmojisData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
-  const [isGameOver, setIsGameOver] = useState(false);
+  const [areAllCardsMatched, setAreAllCardsMatched] = useState(false);
 
   //console.log(emojisData)
   //console.log(selectedCards);
@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     if (emojisData.length && matchedCards.length === emojisData.length) {
-      setIsGameOver(true);
+      setAreAllCardsMatched(true);
     }
   }, [matchedCards]);
 
@@ -70,7 +70,7 @@ function App() {
       const randomIndex = Math.floor(Math.random() * data.length);
       if (!randomIndicesArray.includes(randomIndex)) {
         randomIndicesArray.push(randomIndex);
-        console.log("hello worlds")
+        console.log("hello worlds");
       } else {
         i--;
       }
@@ -109,16 +109,18 @@ function App() {
   //console.log(selectedCards);
   return (
     <main>
-        <h1>Memory</h1>
-        {!isGameOn && <Form handleSubmit={startGame} />}
-        {isGameOn && <MemoryCard 
-        handleClick={turnCard} 
-        data={emojisData} 
-        selectedCards={selectedCards} 
-        matchedCards={matchedCards}
-        />}
+      <h1>Memory</h1>
+      {!isGameOn && <Form handleSubmit={startGame} />}
+      {isGameOn && (
+        <MemoryCard
+          handleClick={turnCard}
+          data={emojisData}
+          selectedCards={selectedCards}
+          matchedCards={matchedCards}
+        />
+      )}
     </main>
-)
+  );
 }
 
 export default App;
