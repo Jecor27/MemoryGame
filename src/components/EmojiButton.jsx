@@ -5,7 +5,7 @@ export default function EmojiButton({
   handleClick,
   selectedCardEntry,
   matchedCardEntry,
-  key,
+  index,
 }) {
   const btnContent =
     selectedCardEntry || matchedCardEntry

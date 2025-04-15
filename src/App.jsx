@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import MemoryCard from "./components/MemoryCard";
+import AssistiveTechInfo from './components/AssistiveTechInfo'
 
 import "./App.css";
 
-function App() {
+export default function App() {
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojisData, setEmojisData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
@@ -70,7 +71,6 @@ function App() {
       const randomIndex = Math.floor(Math.random() * data.length);
       if (!randomIndicesArray.includes(randomIndex)) {
         randomIndicesArray.push(randomIndex);
-        console.log("hello worlds");
       } else {
         i--;
       }
@@ -109,18 +109,22 @@ function App() {
   //console.log(selectedCards);
   return (
     <main>
-      <h1>Memory</h1>
-      {!isGameOn && <Form handleSubmit={startGame} />}
-      {isGameOn && (
-        <MemoryCard
-          handleClick={turnCard}
-          data={emojisData}
-          selectedCards={selectedCards}
-          matchedCards={matchedCards}
-        />
-      )}
+        <h1>Memory</h1>
+        {!isGameOn && <Form handleSubmit={startGame} />}
+        {isGameOn && !areAllCardsMatched &&
+            <AssistiveTechInfo
+                emojisData={emojisData}
+                matchedCards={matchedCards}
+            />
+        }
+        {isGameOn &&
+            <MemoryCard
+                handleClick={turnCard}
+                data={emojisData}
+                selectedCards={selectedCards}
+                matchedCards={matchedCards}
+            />
+        }
     </main>
-  );
+)
 }
-
-export default App;
