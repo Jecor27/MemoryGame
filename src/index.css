@@ -44,7 +44,7 @@ main {
     padding: 2em 3em;
     border: 1px solid var(--dark-primary);
     box-shadow: 0 0 5px 2px var(--light-primary);
-
+    
 }
 
 /*===========================
@@ -64,7 +64,7 @@ h1 {
 }
 
 .p--regular {
-    font-size: 1.125em;
+    font-size: 1.125em;    
 }
 
 /*===========================
@@ -173,7 +173,7 @@ Game
 
 .btn--emoji__front,
 .btn--emoji__back--selected {
-    backface-visibility: hidden;
+    backface-visibility: hidden;    
 }
 
 .btn--emoji__back--matched {
@@ -198,20 +198,19 @@ Game
 
 /*===========================
 Screen reader only
-Source: https://gist.github.com/ffoodd/000b59f431e3e64e4ce1a24d5bb36034
 ============================*/
 .sr-only {
-    border: 0 !important;
-    clip: rect(1px, 1px, 1px, 1px) !important;
-    -webkit-clip-path: inset(50%) !important;
-    clip-path: inset(50%) !important;
-    height: 1px !important;
-    margin: -1px !important;
-    overflow: hidden !important;
-    padding: 0 !important;
-    position: absolute !important;
-    width: 1px !important;
-    white-space: nowrap !important;
+	border: 0 !important;
+	clip: rect(1px, 1px, 1px, 1px) !important;
+	-webkit-clip-path: inset(50%) !important;
+		clip-path: inset(50%) !important;
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+	position: absolute !important;
+	width: 1px !important;
+	white-space: nowrap !important;
 }
 
 /*===========================

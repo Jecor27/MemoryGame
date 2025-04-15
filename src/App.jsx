@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import MemoryCard from "./components/MemoryCard";
 import AssistiveTechInfo from './components/AssistiveTechInfo'
+import GameOver from "./components/GameOver";
 
-import "./App.css";
 
 export default function App() {
   const [isGameOn, setIsGameOn] = useState(false);
@@ -106,6 +106,13 @@ export default function App() {
     }
   }
 
+  function resetGame() {
+    setIsGameOn(false);
+    setSelectedCards([]);
+    setMatchedCards([]);
+    setAreAllCardsMatched(false);
+  }
+
   //console.log(selectedCards);
   return (
     <main>
@@ -117,6 +124,7 @@ export default function App() {
                 matchedCards={matchedCards}
             />
         }
+        {areAllCardsMatched && <GameOver handleClick={resetGame}/>}
         {isGameOn &&
             <MemoryCard
                 handleClick={turnCard}
