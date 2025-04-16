@@ -3,15 +3,19 @@ import Form from "./components/Form";
 import MemoryCard from "./components/MemoryCard";
 import AssistiveTechInfo from './components/AssistiveTechInfo'
 import GameOver from "./components/GameOver";
+import ErrorCard from "./components/ErrorCard";
 
 
 export default function App() {
+  const initialFormData = {category: "animals-and-nature", number: 10};
+  const [formData, setFormData] = useState(initialFormData);
   const [isGameOn, setIsGameOn] = useState(false);
   const [emojisData, setEmojisData] = useState([]);
   const [selectedCards, setSelectedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [areAllCardsMatched, setAreAllCardsMatched] = useState(false);
-
+  const [isError, setIsError] = useState(false);
+  //console.log(isError)
   //console.log(emojisData)
   //console.log(selectedCards);
   //console.log(matchedCards);
@@ -33,11 +37,16 @@ export default function App() {
     }
   }, [matchedCards]);
 
+  function handleFormChange(e) {
+    setFormData(prevFormData => ({...prevFormData, [e.target.name]: e.target.value}))
+}
+
   async function startGame(e) {
     e.preventDefault();
     try {
+      
       const URL =
-        "https://emojihub.yurace.pro/api/all/category/animals-and-nature";
+        `https://emojihub.yurace.pro/api/all/category/${formData.category}`;
       const response = await fetch(URL);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
@@ -53,6 +62,7 @@ export default function App() {
       setIsGameOn(true);
     } catch (err) {
       console.error(err.message);
+      setIsError(true);
     }
   }
 
@@ -67,7 +77,7 @@ export default function App() {
 
   const getRandomIndices = (data) => {
     const randomIndicesArray = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < (formData.number / 2); i++) {
       const randomIndex = Math.floor(Math.random() * data.length);
       if (!randomIndicesArray.includes(randomIndex)) {
         randomIndicesArray.push(randomIndex);
@@ -113,11 +123,17 @@ export default function App() {
     setAreAllCardsMatched(false);
   }
 
+  function resetError() {
+    setIsError(false);
+  }
+
   //console.log(selectedCards);
   return (
     <main>
         <h1>Memory</h1>
-        {!isGameOn && <Form handleSubmit={startGame} />}
+        {!isGameOn && !isError &&
+                <Form handleSubmit={startGame} handleChange={handleFormChange} />
+            }
         {isGameOn && !areAllCardsMatched &&
             <AssistiveTechInfo
                 emojisData={emojisData}
@@ -133,6 +149,7 @@ export default function App() {
                 matchedCards={matchedCards}
             />
         }
+        {isError && <ErrorCard handleClick={resetError} />}
     </main>
 )
 }
