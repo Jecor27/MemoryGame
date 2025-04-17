@@ -1,6 +1,6 @@
 # Memory Game
 
-A fun and interactive card matching game built with modern web technologies. Test your memory by matching pairs of emoji cards!
+A fun and interactive card matching game built with modern web technologies.
 
 ![Memory Game Screenshot](./src/imgs/memory.png)
 
@@ -105,16 +105,3 @@ src/
 - Create a leaderboard using local storage
 - Add user accounts to save progress
 
-## Contributing
-
-Contributions are welcome! Feel free to submit a pull request or create an issue if you have any ideas or find any bugs.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Acknowledgments
-
-- EmojiHub API for providing the emoji data
-- React and Vite communities for excellent documentation
-- All contributors who have helped improve this game
