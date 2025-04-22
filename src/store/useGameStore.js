@@ -10,15 +10,15 @@ const getGameConfig = (cardCount) => {
   
   // Scale timer and lives based on number of cards
   if (count <= 10) {
-    return { timer: 60, lives: 9 }; // 1 minute for 10 cards
+    return { timer: 60, lives: 6 }; // 1 minute for 10 cards
   } else if (count <= 20) {
-    return { timer: 120, lives: 15 }; // 2 minutes for 20 cards
+    return { timer: 120, lives: 10 }; // 2 minutes for 20 cards
   } else if (count <= 30) {
-    return { timer: 180, lives: 25 }; // 3 minutes for 30 cards
+    return { timer: 180, lives: 20 }; // 3 minutes for 30 cards
   } else if (count <= 40) {
-    return { timer: 240, lives: 40 }; // 4 minutes for 40 cards
+    return { timer: 240, lives: 25}; // 4 minutes for 40 cards
   } else {
-    return { timer: 300, lives: 80 }; // 5 minutes for 50 cards
+    return { timer: 300, lives: 35 }; // 5 minutes for 50 cards
   }
 };
 
