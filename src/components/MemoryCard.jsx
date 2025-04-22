@@ -1,3 +1,4 @@
+
 import EmojiButton from "./EmojiButton";
 
 export default function MemoryCard({
@@ -9,10 +10,10 @@ export default function MemoryCard({
 }) {
   const cardEl = data.map((emoji, index) => {
     const selectedCardEntry = selectedCards.find(
-      (emoji) => emoji.index === index
+      (card) => card.index === index
     );
     const matchedCardEntry = matchedCards.find(
-      (emoji) => emoji.index === index
+      (card) => card.index === index
     );
 
     const cardStyle = matchedCardEntry
@@ -22,14 +23,14 @@ export default function MemoryCard({
       : "";
 
     return (
-      <li key={index} className={`card-item ${cardStyle}`}>
+      <li key={index} className={`card-item ${cardStyle} ${isCheckingMatch ? 'checking-match' : ''}`}>
         <EmojiButton
           index={index}
           emoji={emoji}
           handleClick={() => handleClick(emoji.name, index)}
           selectedCardEntry={selectedCardEntry}
           matchedCardEntry={matchedCardEntry}
-          disabled={isCheckingMatch} // Pass disabled prop during matching check
+          disabled={isCheckingMatch}
         />
       </li>
     );

@@ -1,5 +1,10 @@
+
 const data = {
     category: [
+        {
+            name: "Rick and Morty",
+            value: "rick-and-morty"
+        },
         {
             name: "Animals and nature",
             value: "animals-and-nature"
