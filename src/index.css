@@ -156,6 +156,8 @@ Game
 
 .card-item {
     list-style: none;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
 }
 
 /* Animated memory card */
@@ -244,4 +246,24 @@ Media queries
     .card-container {
         grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
     }
+}
+
+
+
+/* Make sure the front face isn't visible when card is flipped */
+.btn--emoji__front {
+    backface-visibility: hidden;
+    transition: transform 0.6s, background-color 0.3s, border 0.3s, box-shadow 0.3s;
+}
+
+/* Adjust back face transition */
+.btn--emoji__back--selected,
+.btn--emoji__back--matched {
+    transition: transform 0.6s;
+    backface-visibility: hidden;
+}
+
+/* Add styles for when cards are being checked */
+.card-item.checking-match {
+    pointer-events: none;
 }

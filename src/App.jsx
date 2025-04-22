@@ -16,6 +16,7 @@ export default function App() {
   const matchedCards = useGameStore((state) => state.matchedCards);
   const areAllCardsMatched = useGameStore((state) => state.areAllCardsMatched);
   const isError = useGameStore((state) => state.isError);
+  const isCheckingMatch = useGameStore((state) => state.isCheckingMatch);
   
   // Get actions from store
   const handleFormChange = useGameStore((state) => state.handleFormChange);
@@ -50,6 +51,7 @@ export default function App() {
           data={emojisData}
           selectedCards={selectedCards}
           matchedCards={matchedCards}
+          isCheckingMatch={isCheckingMatch}
         />
       )}
       {isError && <ErrorCard handleClick={resetError} />}

@@ -6,6 +6,7 @@ export default function EmojiButton({
   selectedCardEntry,
   matchedCardEntry,
   index,
+  disabled
 }) {
   const btnContent =
     selectedCardEntry || matchedCardEntry
@@ -27,8 +28,8 @@ export default function EmojiButton({
   return (
     <button
       className={`btn btn--emoji ${btnStyle}`}
-      onClick={selectedCardEntry ? null : handleClick}
-      disabled={matchedCardEntry}
+      onClick={selectedCardEntry || disabled ? null : handleClick}
+      disabled={matchedCardEntry || disabled}
       aria-label={`Position ${index + 1}: ${btnAria}`}
       aria-live="polite"
     >

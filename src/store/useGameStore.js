@@ -13,6 +13,7 @@ const useGameStore = create((set, get) => ({
   matchedCards: [],
   areAllCardsMatched: false,
   isError: false,
+  isCheckingMatch: false, // New state to prevent clicking during card flip animation
 
   // Actions
   setIsFirstRender: (value) => set({ isFirstRender: value }),
@@ -92,7 +93,12 @@ const useGameStore = create((set, get) => ({
   },
   
   turnCard: (name, index) => {
-    const { selectedCards } = get();
+    const { selectedCards, isCheckingMatch } = get();
+    
+    // If we're currently checking a match (during the flip back animation), 
+    // don't allow new card selection
+    if (isCheckingMatch) return;
+    
     const selectedCardEntry = selectedCards.find((emoji) => emoji.index === index);
 
     if (selectedCards.length < 2 && !selectedCardEntry) {
@@ -117,10 +123,28 @@ const useGameStore = create((set, get) => ({
   checkForMatches: () => {
     const { selectedCards, matchedCards } = get();
     
-    if (selectedCards.length === 2 && selectedCards[0].name === selectedCards[1].name) {
-      set((state) => ({
-        matchedCards: [...state.matchedCards, ...state.selectedCards]
-      }));
+    if (selectedCards.length === 2) {
+      if (selectedCards[0].name === selectedCards[1].name) {
+        // If cards match, add them to matchedCards array
+        set((state) => ({
+          matchedCards: [...state.matchedCards, ...state.selectedCards]
+        }));
+        // Clear selected cards after a short delay to show the match
+        setTimeout(() => {
+          set({ selectedCards: [] });
+        }, 300);
+      } else {
+        // If cards don't match, set isCheckingMatch to prevent new selections
+        set({ isCheckingMatch: true });
+        
+        // Wait 1 second before flipping cards back over
+        setTimeout(() => {
+          set({ 
+            selectedCards: [],
+            isCheckingMatch: false
+          });
+        }, 1000);
+      }
     }
   },
   

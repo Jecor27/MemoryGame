@@ -5,6 +5,7 @@ export default function MemoryCard({
   data,
   selectedCards,
   matchedCards,
+  isCheckingMatch
 }) {
   const cardEl = data.map((emoji, index) => {
     const selectedCardEntry = selectedCards.find(
@@ -28,6 +29,7 @@ export default function MemoryCard({
           handleClick={() => handleClick(emoji.name, index)}
           selectedCardEntry={selectedCardEntry}
           matchedCardEntry={matchedCardEntry}
+          disabled={isCheckingMatch} // Pass disabled prop during matching check
         />
       </li>
     );
