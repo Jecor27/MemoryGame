@@ -12,10 +12,10 @@ const ref = useRef(null)
     return (
         <div className="wrapper wrapper--accent" tabIndex="-1" ref={ref}>
             <p className="p--large">
-                Congratulations! You have matched all the cards!
+                Stellar achievement! You've aligned all the cosmic cards!
             </p>
             <RegularButton handleClick={handleClick}>
-                Play again
+                New Mission
             </RegularButton>
         </div>
     )

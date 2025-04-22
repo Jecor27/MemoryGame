@@ -12,12 +12,12 @@ export default function Form({ handleSubmit, handleChange, isFirstRender }) {
     return (
         <div className="form-container" ref={divRef} tabIndex={-1}>
             <p className="p--regular">
-                Customize the game by selecting an emoji category and a number of memory cards.
+                Welcome to the cosmic memory challenge! Select an emoji constellation and the number of stellar cards to begin your galactic journey.
             </p>
             <form className="wrapper">
                 <Select handleChange={handleChange} />
                 <RegularButton handleClick={handleSubmit}>
-                    Start Game
+                    Launch Mission
                 </RegularButton>
             </form>
         </div>

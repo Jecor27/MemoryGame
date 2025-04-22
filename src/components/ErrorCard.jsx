@@ -11,12 +11,11 @@ export default function ErrorCard({ handleClick }) {
 
   return (
     <div className="wrapper wrapper--accent" ref={divRef} tabIndex="-1">
-      <p className="p--large">Sorry, there was an error.</p>
+      <p className="p--large">Space anomaly detected!</p>
       <p className="p--regular">
-        Please come back later or click the button below to try restarting the
-        game.
+        We've encountered a cosmic disturbance. Return to the space station or press the button below to re-initialize the mission.
       </p>
-      <RegularButton handleClick={handleClick}>Restart Game</RegularButton>
+      <RegularButton handleClick={handleClick}>Restart Mission</RegularButton>
     </div>
   );
 }
