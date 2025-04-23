@@ -2,8 +2,6 @@
 
 A fun and interactive card matching game built with modern web technologies.
 
-![Memory Game Screenshot](./src/imgs/memory.png)
-
 ## Live Demo
 
 Check out the live version of the game: [Memory Game](https://memorygamey.netlify.app)

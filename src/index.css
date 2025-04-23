@@ -1,5 +1,4 @@
 
-
 * {
     margin: 0;
     box-sizing: border-box;
@@ -390,6 +389,8 @@
     border-radius: 1em;
     border: 1px solid var(--space-highlight);
     box-shadow: 0 0 15px rgba(75, 172, 254, 0.3);
+    flex-wrap: wrap; /* Allow wrapping on very small screens */
+    gap: 0.5em; /* Add gap between wrapped elements */
   }
   
   .game-status__timer,
@@ -397,6 +398,12 @@
     display: flex;
     align-items: center;
     gap: 0.5em;
+  }
+  
+  /* Make the lives container responsive */
+  .game-status__lives {
+    flex-wrap: wrap; /* Allow hearts to wrap if needed */
+    max-width: 60%; /* Prevent taking up too much space */
   }
   
   .timer-icon {
@@ -427,17 +434,21 @@
   }
   
   .lives-label {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 3vw, 1.25rem); /* Responsive font size */
     font-weight: 500;
+    white-space: nowrap; /* Keep "Lives:" on one line */
   }
   
   .lives-hearts {
     display: flex;
     gap: 0.25em;
+    flex-wrap: wrap; /* Allow hearts to wrap */
+    max-width: 100%; /* Use available space */
+    justify-content: flex-start; /* Align hearts to the start */
   }
   
   .heart-icon {
-    font-size: 1.25rem;
+    font-size: clamp(1rem, 3vw, 1.25rem); /* Responsive heart size */
     animation: beat 1.5s infinite alternate;
     display: inline-block;
   }
@@ -637,6 +648,41 @@
   /*===========================
   Media queries
   ============================*/
+  /* On very small screens, stack timer and lives vertically */
+  @media (max-width: 380px) {
+    .game-status {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8em;
+      padding: 0.8em;
+    }
+    
+    .game-status__timer,
+    .game-status__lives {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .lives-hearts {
+      justify-content: center;
+    }
+  }
+  
+  /* Adjust specific screen sizes */
+  @media (min-width: 381px) and (max-width: 767px) {
+    .game-status {
+      padding: 0.8em;
+    }
+    
+    .heart-icon {
+      font-size: 1rem; /* Smaller hearts on small screens */
+    }
+    
+    .timer-display {
+      font-size: 1.2rem; /* Smaller timer text */
+    }
+  }
+  
   @media (min-width: 768px) {
     h1 {
       font-size: 4rem;
@@ -653,6 +699,11 @@
     
     .game-status {
       max-width: 800px;
+      padding: 1em 1.5em;
+    }
+    
+    .heart-icon {
+      font-size: 1.25rem;
     }
   }
   
